@@ -9,9 +9,12 @@ import { Form } from '@/components/ui/form'
 
 import toast from 'react-hot-toast'
 import { CustomFormField } from '@/components/form/FormController'
-import { useCustomerRegistration, useUserLogin } from '@/hooks/auth.hook'
+import { useUserLogin } from '@/hooks/auth.hook'
 import { loginSchema } from '@/schema/formSchema'
-import CreateMainCategoryForm from '@/components/CreateMainCategoryForm'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useUser } from '@/context/user.provider'
+import { useEffect } from 'react'
+import Link from 'next/link'
 
 const defaultFormValues = {
   name: 'John Doe',
@@ -21,10 +24,17 @@ const defaultFormValues = {
 }
 
 const LoginPage = () => {
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const { setIsLoading: userLoading } = useUser()
+
+  const redirect = searchParams.get('redirect')
+
   const {
     mutate: handleLogin,
-    isPending: IsPending,
+    isPending,
     error: isError,
+    isSuccess,
   } = useUserLogin()
 
   const form = useForm({
@@ -42,9 +52,17 @@ const LoginPage = () => {
     handleLogin(userData)
   }
 
-  const { errors } = form.formState
+  useEffect(() => {
+    if (!isPending && isSuccess) {
+      if (redirect) {
+        router.push(redirect)
+      } else {
+        router.push('/')
+      }
+    }
+  }, [isPending, isSuccess])
 
-  const isPending = IsPending
+  const { errors } = form.formState
 
   if (isPending) {
     return <h1 className='p-8 text-4xl font-bold text-center'>Loading...</h1>
@@ -52,14 +70,15 @@ const LoginPage = () => {
 
   return (
     <>
-      <CreateMainCategoryForm />
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className='p-8 rounded bg-muted'
         >
-          <h2 className='mb-6 text-4xl font-semibold capitalize'>login</h2>
-          <div className='grid items-start gap-4 md:grid-cols-2 lg:grid-cols-2'>
+          <h2 className='mb-6 text-3xl text-center font-semibold capitalize'>
+            login
+          </h2>
+          <div className='grid items-start w-[50%] mx-auto gap-4 md:grid-cols-2 lg:grid-cols-2'>
             <CustomFormField
               name='email'
               control={form.control}
@@ -86,6 +105,9 @@ const LoginPage = () => {
             )}
           </div>
         </form>
+        <div className='text-center'>
+          Don&lsquo;t have account ? <Link href={'/register'}>Register</Link>
+        </div>
       </Form>
     </>
   )

@@ -18,6 +18,7 @@ export function Providers({ children }: ProvidersProps) {
     <UserProvider>
       <QueryClientProvider client={queryClient}>
         <Toaster />
+
         {children}
       </QueryClientProvider>
     </UserProvider>
