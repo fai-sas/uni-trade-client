@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
+
+import { SidebarProvider } from '@/components/ui/sidebar'
 import { SiteHeader } from './site-header'
 import { AppSidebar } from './app-sidebar'
 
@@ -10,9 +12,6 @@ const SidebarComponent = () => {
         <SiteHeader />
         <div className='flex flex-1'>
           <AppSidebar />
-          <SidebarInset>
-            <h1 className=' p-8 font-bold text-2xl'>Content Inside Sidebar</h1>
-          </SidebarInset>
         </div>
       </SidebarProvider>
     </div>

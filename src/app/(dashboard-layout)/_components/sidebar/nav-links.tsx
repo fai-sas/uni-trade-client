@@ -33,6 +33,30 @@ export const sideBarItems = {
         ],
       },
       {
+        title: 'Category Management',
+        url: '#',
+        icon: SquareTerminal,
+        isActive: true,
+        items: [
+          {
+            title: 'Main Categories',
+            url: '/admin/main-categories',
+          },
+          {
+            title: 'Sub Categories',
+            url: '/admin/all-products',
+          },
+          {
+            title: ' Nested Sub Categories',
+            url: '/admin/all-products',
+          },
+          {
+            title: 'Add Category',
+            url: '/admin/add-products',
+          },
+        ],
+      },
+      {
         title: 'User Management',
         url: '#',
         icon: SquareTerminal,

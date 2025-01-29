@@ -32,9 +32,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   // Select the appropriate nav menu items based on the user's role
   let roleBasedMenuItems: any[] = []
 
-  const sidebar = sideBarItems?.navMain?.vendor
-  console.log(sidebar)
-
   if (user?.role === 'ADMIN') {
     roleBasedMenuItems = [
       ...roleBasedMenuItems,
