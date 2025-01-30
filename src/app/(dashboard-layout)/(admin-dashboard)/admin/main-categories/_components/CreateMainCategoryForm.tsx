@@ -5,12 +5,12 @@
 
 import { useCreateMainCategory } from '@/hooks/main.category.hook'
 import { useForm } from 'react-hook-form'
-import { CustomFormField } from './form/FormController'
-import { Button } from './ui/button'
+import { CustomFormField } from '../../../../../../components/form/FormController'
+import { Button } from '../../../../../../components/ui/button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { Form } from '@/components/ui/form'
-import { ModalController } from './modals/ModalController'
+import { ModalController } from '../../../../../../components/modals/ModalController'
 
 const CreateMainCategoryForm = () => {
   const {

@@ -27,8 +27,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   const user = userData?.data
 
-  console.log(user)
-
   // Select the appropriate nav menu items based on the user's role
   let roleBasedMenuItems: any[] = []
 

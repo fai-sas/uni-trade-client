@@ -8,13 +8,16 @@ import {
   useGetMainCategories,
 } from '@/hooks/main.category.hook'
 import { useForm } from 'react-hook-form'
-import { CustomFormField, CustomFormSelect } from './form/FormController'
-import { Button } from './ui/button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { Form } from '@/components/ui/form'
-import { ModalController } from './modals/ModalController'
 import { useCreateSubCategory } from '@/hooks/sub.category.hook'
+import { ModalController } from '@/components/modals/ModalController'
+import {
+  CustomFormField,
+  CustomFormSelect,
+} from '@/components/form/FormController'
+import { Button } from '@/components/ui/button'
 
 const CreateSubCategoryForm = () => {
   const {

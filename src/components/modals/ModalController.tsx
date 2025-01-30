@@ -23,7 +23,7 @@ import {
 } from '@/components/ui/drawer'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import CreateMainCategoryForm from '../CreateMainCategoryForm'
+import CreateMainCategoryForm from '../../app/(dashboard-layout)/(admin-dashboard)/admin/main-categories/_components/CreateMainCategoryForm'
 import { useMediaQuery } from '@/hooks/use-media-query'
 
 interface IProps {

@@ -5,7 +5,7 @@
 import { useGetMainCategories } from '@/hooks/main.category.hook'
 import MainCategoryCard from './MainCategoryCard'
 
-import CreateMainCategoryForm from '@/components/CreateMainCategoryForm'
+import CreateMainCategoryForm from '@/app/(dashboard-layout)/(admin-dashboard)/admin/main-categories/_components/CreateMainCategoryForm'
 
 const MainCategory = () => {
   const { data } = useGetMainCategories()
