@@ -16,14 +16,14 @@ import {
 } from '@/components/ui/form'
 import { Input } from '../ui/input'
 
-export function CustomFormField({ name, type, control }) {
+export function CustomFormField({ name, labelText, type, control }) {
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className='capitalize'>{name}</FormLabel>
+          <FormLabel className='capitalize'>{labelText || name}</FormLabel>
           <FormControl>
             <Input
               {...field}

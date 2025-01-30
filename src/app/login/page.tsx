@@ -18,8 +18,8 @@ import Link from 'next/link'
 
 const defaultFormValues = {
   name: 'John Doe',
-  email: 'john@doe.com',
-  password: '123456',
+  email: 'admin@admin.com',
+  password: '12346',
   contactNumber: '01712234568',
 }
 

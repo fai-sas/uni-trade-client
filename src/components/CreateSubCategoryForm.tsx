@@ -3,25 +3,37 @@
 
 'use client'
 
-import { useCreateMainCategory } from '@/hooks/main.category.hook'
+import {
+  useCreateMainCategory,
+  useGetMainCategories,
+} from '@/hooks/main.category.hook'
 import { useForm } from 'react-hook-form'
-import { CustomFormField } from './form/FormController'
+import { CustomFormField, CustomFormSelect } from './form/FormController'
 import { Button } from './ui/button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { Form } from '@/components/ui/form'
 import { ModalController } from './modals/ModalController'
+import { useCreateSubCategory } from '@/hooks/sub.category.hook'
 
-const CreateMainCategoryForm = () => {
+const CreateSubCategoryForm = () => {
   const {
-    mutate: handleCreateMainCategory,
+    mutate: handleCreateSubCategory,
     isPending,
     isSuccess,
     error: isError,
-  } = useCreateMainCategory()
+  } = useCreateSubCategory()
+
+  const { data: mainCategories } = useGetMainCategories()
+
+  const mainCategoryOptions = mainCategories?.data?.map((category) => ({
+    label: category.mainCategoryName,
+    value: category.mainCategoryId,
+  }))
 
   const defaultFormValues = {
-    mainCategoryName: '',
+    mainCategoryId: '',
+    subCategoryName: '',
   }
 
   const form = useForm({
@@ -30,28 +42,36 @@ const CreateMainCategoryForm = () => {
   })
 
   const onSubmit = async (data: any) => {
-    const mainCategoryData = {
-      mainCategoryName: data.mainCategoryName,
+    const subCategoryData = {
+      mainCategoryId: data.mainCategoryId,
+      subCategoryName: data.subCategoryName,
     }
-    console.log(mainCategoryData)
+    console.log(subCategoryData)
 
-    handleCreateMainCategory(mainCategoryData)
+    handleCreateSubCategory(subCategoryData)
   }
 
   return (
-    <ModalController buttonText='Add Main Category' title='Add '>
+    <ModalController buttonText='Add Sub Category' title='Add '>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className='p-8 rounded bg-muted'
         >
           <h2 className='mb-6 text-3xl text-center font-semibold capitalize'>
-            Add Main Category
+            Add Sub Category
           </h2>
-          <div className='grid items-start mx-auto gap-4 md:grid-cols-2 lg:grid-cols-2'>
-            <CustomFormField
-              name='mainCategoryName'
+          <div className='grid items-start  mx-auto gap-4 md:grid-cols-2 lg:grid-cols-2'>
+            <CustomFormSelect
+              name='mainCategoryId'
               labelText='Main Category'
+              control={form.control}
+              items={mainCategoryOptions}
+            />
+
+            <CustomFormField
+              name='subCategoryName'
+              labelText='Sub Category'
               control={form.control}
               type={undefined}
             />
@@ -76,4 +96,4 @@ const CreateMainCategoryForm = () => {
   )
 }
 
-export default CreateMainCategoryForm
+export default CreateSubCategoryForm

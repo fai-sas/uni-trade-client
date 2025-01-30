@@ -44,11 +44,11 @@ export const sideBarItems = {
           },
           {
             title: 'Sub Categories',
-            url: '/admin/all-products',
+            url: '/admin/sub-categories',
           },
           {
             title: ' Nested Sub Categories',
-            url: '/admin/all-products',
+            url: '/admin/nested-sub-categories',
           },
           {
             title: 'Add Category',
