@@ -59,8 +59,7 @@ export const useUpdateMyProfile = () => {
 
   return useMutation({
     mutationKey: ['UPDATE_PROFILE'],
-    mutationFn: async ({ userId, profileData }) =>
-      await updateProfile(userId, profileData),
+    mutationFn: async (profileData) => await updateProfile(profileData),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['GET_ME'],

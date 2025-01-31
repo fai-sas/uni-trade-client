@@ -54,6 +54,8 @@ export function ImageUploaderSingle({ name }: ImageUploaderProps) {
           <div className='grid grid-cols-3 gap-2'>
             <Image
               alt='Uploaded Image'
+              width={400}
+              height={400}
               className='object-cover w-full h-full rounded-md'
               src={image}
             />

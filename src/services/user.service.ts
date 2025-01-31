@@ -6,6 +6,7 @@ import { FieldValues } from 'react-hook-form'
 
 import { cookies } from 'next/headers'
 import axiosInstance from '@/lib/axiosInstance'
+import axios from 'axios'
 
 export const getAllUsers = async () => {
   try {
@@ -51,17 +52,24 @@ export const getActivities = async () => {
   }
 }
 
-export const updateProfile = async (userId: any, profileData: any) => {
+export const updateProfile = async (profileData: any) => {
   try {
-    const res = await axiosInstance.put(
-      `/users/profile/update/${userId}`,
+    const res = await axiosInstance.patch(
+      `/users/update-my-profile`,
       profileData
     )
 
     return res.data
   } catch (error) {
-    console.error('Failed to update profile:', error)
-    throw new Error('Failed to update profile')
+    if (axios.isAxiosError(error)) {
+      console.error('Axios error:', error.response?.data || error.message)
+      throw new Error(
+        error.response?.data?.message || 'An unexpected error occurred'
+      )
+    } else {
+      console.error('Unexpected error:', error)
+      throw new Error('An unexpected error occurred')
+    }
   }
 }
 

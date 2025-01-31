@@ -1,43 +1,44 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 'use client'
 
-import {
-  useCreateMainCategory,
-  useGetMainCategories,
-} from '@/hooks/main.category.hook'
+import { useGetMainCategories } from '@/hooks/main.category.hook'
 import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import Link from 'next/link'
-import { Form } from '@/components/ui/form'
-import { useCreateSubCategory } from '@/hooks/sub.category.hook'
-import { ModalController } from '@/components/modals/ModalController'
 import {
   CustomFormField,
   CustomFormSelect,
-} from '@/components/form/FormController'
-import { Button } from '@/components/ui/button'
+} from '../../../../../../components/form/FormController'
+import { Button } from '../../../../../../components/ui/button'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
+import { Form } from '@/components/ui/form'
+import { ModalController } from '../../../../../../components/modals/ModalController'
+import { useGetSubCategories } from '@/hooks/sub.category.hook'
+import {
+  useCreateNestedSubCategory,
+  useGetNestedSubCategories,
+} from '@/hooks/nestedSub.category.hook'
+import { useEffect, useState } from 'react'
+import { useCreateProduct } from '@/hooks/product.hook'
+import { ImageUploader } from '@/components/ImageUploader'
+import { useUpdateMyProfile } from '@/hooks/user.hook'
 import { ImageUploaderSingle } from '@/components/ImageUploaderSingle'
 
-const CreateSubCategoryForm = () => {
+const UpdateProfileForm = ({ user }) => {
   const {
-    mutate: handleCreateSubCategory,
+    mutate: handleUpdateProfile,
     isPending,
     isSuccess,
     error: isError,
-  } = useCreateSubCategory()
+  } = useUpdateMyProfile()
 
-  const { data: mainCategories } = useGetMainCategories()
-
-  const mainCategoryOptions = mainCategories?.data?.map((category) => ({
-    label: category.mainCategoryName,
-    value: category.mainCategoryId,
-  }))
+  console.log(user)
 
   const defaultFormValues = {
-    mainCategoryId: '',
-    subCategoryName: '',
+    name: user?.name,
+    contactNumber: user?.contactNumber,
     images: '',
   }
 
@@ -47,40 +48,40 @@ const CreateSubCategoryForm = () => {
   })
 
   const onSubmit = async (data: any) => {
-    const subCategoryData = {
-      mainCategoryId: data.mainCategoryId,
-      subCategoryName: data.subCategoryName,
+    const profileData = {
+      name: data.name,
+      contactNumber: data.contactNumber,
       images: data.images,
     }
-    console.log(subCategoryData)
+    console.log(profileData)
 
-    handleCreateSubCategory(subCategoryData)
+    handleUpdateProfile(profileData)
   }
 
   return (
-    // <ModalController buttonText='Add Sub Category' title='Add '>
+    // <ModalController buttonText='Add Products' title='Add '>
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className='p-8 rounded bg-muted'
       >
         <h2 className='mb-6 text-3xl text-center font-semibold capitalize'>
-          Add Sub Category
+          Update Profile
         </h2>
         <div className='grid items-start  mx-auto gap-4 md:grid-cols-2 lg:grid-cols-2'>
-          <CustomFormSelect
-            name='mainCategoryId'
-            labelText='Main Category'
-            control={form.control}
-            items={mainCategoryOptions}
-          />
-
           <CustomFormField
-            name='subCategoryName'
-            labelText='Sub Category'
+            name='name'
+            labelText='Name'
             control={form.control}
             type={undefined}
           />
+          <CustomFormField
+            name='contactNumber'
+            labelText='Contact Number'
+            control={form.control}
+            type={undefined}
+          />
+
           {/* Image Uploader */}
           <div className='flex flex-wrap gap-2 py-2'>
             <div className='flex-1 min-w-fit'>
@@ -93,7 +94,7 @@ const CreateSubCategoryForm = () => {
             className='self-end capitalize'
             disabled={isPending}
           >
-            {isPending ? 'loading...' : '  Add'}
+            {isPending ? 'loading...' : '  Update Profile'}
           </Button>
           {/* Handle errors */}
           {/* {isError && (
@@ -108,4 +109,4 @@ const CreateSubCategoryForm = () => {
   )
 }
 
-export default CreateSubCategoryForm
+export default UpdateProfileForm

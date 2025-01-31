@@ -17,6 +17,7 @@ import { ModalController } from '../../../../../../components/modals/ModalContro
 import { useGetSubCategories } from '@/hooks/sub.category.hook'
 import { useCreateNestedSubCategory } from '@/hooks/nestedSub.category.hook'
 import { useEffect, useState } from 'react'
+import { ImageUploaderSingle } from '@/components/ImageUploaderSingle'
 
 const CreateNestedSubCategoryForm = () => {
   const {
@@ -39,6 +40,7 @@ const CreateNestedSubCategoryForm = () => {
     mainCategoryId: '',
     subCategoryId: '',
     nestedSubCategoryName: '',
+    images: '',
   }
 
   const [filteredSubCategories, setFilteredSubCategories] = useState([])
@@ -71,6 +73,7 @@ const CreateNestedSubCategoryForm = () => {
       mainCategoryId: data.mainCategoryId,
       subCategoryId: data.subCategoryId,
       nestedSubCategoryName: data.nestedSubCategoryName,
+      images: data.images,
     }
     console.log(nestedSubCategoryData)
 
@@ -78,57 +81,63 @@ const CreateNestedSubCategoryForm = () => {
   }
 
   return (
-    <ModalController buttonText='Add Nested Sub Category' title='Add '>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className='p-8 rounded bg-muted'
-        >
-          <h2 className='mb-6 text-3xl text-center font-semibold capitalize'>
-            Add Sub Category
-          </h2>
-          <div className='grid items-start  mx-auto gap-4 md:grid-cols-2 lg:grid-cols-2'>
-            <CustomFormSelect
-              name='mainCategoryId'
-              labelText='Main Category'
-              control={form.control}
-              items={mainCategoryOptions}
-            />
-            <CustomFormSelect
-              name='subCategoryId'
-              labelText='Sub Category'
-              control={form.control}
-              // items={subCategoryOptions}
-              items={filteredSubCategories?.map((subCategory) => ({
-                label: subCategory?.subCategoryName,
-                value: subCategory?.subCategoryId,
-              }))}
-            />
+    // <ModalController buttonText='Add Nested Sub Category' title='Add '>
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className='p-8 rounded bg-muted'
+      >
+        <h2 className='mb-6 text-3xl text-center font-semibold capitalize'>
+          Add Sub Category
+        </h2>
+        <div className='grid items-start  mx-auto gap-4 md:grid-cols-2 lg:grid-cols-2'>
+          <CustomFormSelect
+            name='mainCategoryId'
+            labelText='Main Category'
+            control={form.control}
+            items={mainCategoryOptions}
+          />
+          <CustomFormSelect
+            name='subCategoryId'
+            labelText='Sub Category'
+            control={form.control}
+            items={filteredSubCategories?.map((subCategory) => ({
+              label: subCategory?.subCategoryName,
+              value: subCategory?.subCategoryId,
+            }))}
+          />
 
-            <CustomFormField
-              name='nestedSubCategoryName'
-              labelText='Nested Sub Category'
-              control={form.control}
-              type={undefined}
-            />
+          <CustomFormField
+            name='nestedSubCategoryName'
+            labelText='Nested Sub Category'
+            control={form.control}
+            type={undefined}
+          />
 
-            <Button
-              type='submit'
-              className='self-end capitalize'
-              disabled={isPending}
-            >
-              {isPending ? 'loading...' : '  Add'}
-            </Button>
-            {/* Handle errors */}
-            {/* {isError && (
+          {/* Image Uploader */}
+          <div className='flex flex-wrap gap-2 py-2'>
+            <div className='flex-1 min-w-fit'>
+              <ImageUploaderSingle name='images' />
+            </div>
+          </div>
+
+          <Button
+            type='submit'
+            className='self-end capitalize'
+            disabled={isPending}
+          >
+            {isPending ? 'loading...' : '  Add'}
+          </Button>
+          {/* Handle errors */}
+          {/* {isError && (
             <p className='text-red-500 font-bold py-2'>
               {error?.data?.message}
             </p>
           )} */}
-          </div>
-        </form>
-      </Form>
-    </ModalController>
+        </div>
+      </form>
+    </Form>
+    // </ModalController>
   )
 }
 

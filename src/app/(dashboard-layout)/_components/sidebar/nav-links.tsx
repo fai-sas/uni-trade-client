@@ -118,6 +118,18 @@ export const sideBarItems = {
           },
         ],
       },
+      {
+        title: 'Profile Management',
+        url: '#',
+        icon: SquareTerminal,
+        isActive: true,
+        items: [
+          {
+            title: 'My Profile',
+            url: '/vendor/vendor-profile',
+          },
+        ],
+      },
     ],
     user: [
       {
