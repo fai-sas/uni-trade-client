@@ -5,7 +5,7 @@
 
 import { useGetSubCategories } from '@/hooks/sub.category.hook'
 import SubCategoryCard from './SubCategoryCard'
-import CreateSubCategoryForm from '@/components/CreateSubCategoryForm'
+import CreateSubCategoryForm from './CreateSubCategoryForm'
 
 const SubCategory = () => {
   const { data } = useGetSubCategories()

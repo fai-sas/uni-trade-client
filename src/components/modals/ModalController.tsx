@@ -21,9 +21,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import CreateMainCategoryForm from '../../app/(dashboard-layout)/(admin-dashboard)/admin/main-categories/_components/CreateMainCategoryForm'
+
 import { useMediaQuery } from '@/hooks/use-media-query'
 
 interface IProps {
@@ -42,7 +40,10 @@ export function ModalController({ children, buttonText, title }: IProps) {
         <DialogTrigger asChild>
           <Button variant='outline'>{buttonText}</Button>
         </DialogTrigger>
-        <DialogContent className='sm:max-w-[425px]'>{children}</DialogContent>
+        <DialogContent className='sm:max-w-[425px]'>
+          <DialogTitle></DialogTitle>
+          {children}
+        </DialogContent>
       </Dialog>
     )
   }

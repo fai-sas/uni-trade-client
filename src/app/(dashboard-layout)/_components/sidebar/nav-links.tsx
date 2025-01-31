@@ -105,8 +105,8 @@ export const sideBarItems = {
         isActive: true,
         items: [
           {
-            title: 'Add Products',
-            url: '/vendor/add-products',
+            title: 'My Products',
+            url: '/vendor/vendor-products',
           },
           {
             title: 'Single Product',
