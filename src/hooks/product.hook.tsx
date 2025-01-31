@@ -9,6 +9,7 @@ import {
   getAllProducts,
   getMyProducts,
   getSingleProduct,
+  getVendorProducts,
   searchProducts,
   updateProduct,
 } from '../services/product.service'
@@ -33,6 +34,13 @@ export const useGetAllProducts = () => {
   return useQuery({
     queryKey: ['ALL_PRODUCTS'],
     queryFn: async () => await getAllProducts(),
+  })
+}
+
+export const useGetVendorProducts = () => {
+  return useQuery({
+    queryKey: ['VENDOR_PRODUCTS'],
+    queryFn: async () => await getVendorProducts(),
   })
 }
 

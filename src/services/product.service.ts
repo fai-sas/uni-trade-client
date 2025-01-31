@@ -32,8 +32,33 @@ export const getAllProducts = async () => {
 
     return res.data
   } catch (error) {
-    console.error('Failed to fetch data:', error)
-    throw new Error('Failed to fetch data')
+    if (axios.isAxiosError(error)) {
+      console.error('Axios error:', error.response?.data || error.message)
+      throw new Error(
+        error.response?.data?.message || 'An unexpected error occurred'
+      )
+    } else {
+      console.error('Unexpected error:', error)
+      throw new Error('An unexpected error occurred')
+    }
+  }
+}
+
+export const getVendorProducts = async () => {
+  try {
+    const res = await axiosInstance.get('/products/vendor-products')
+
+    return res.data
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error('Axios error:', error.response?.data || error.message)
+      throw new Error(
+        error.response?.data?.message || 'An unexpected error occurred'
+      )
+    } else {
+      console.error('Unexpected error:', error)
+      throw new Error('An unexpected error occurred')
+    }
   }
 }
 

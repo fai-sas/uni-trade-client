@@ -111,95 +111,95 @@ const CreateProductForm = () => {
   }
 
   return (
-    // <ModalController buttonText='Add Products' title='Add '>
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className='p-8 rounded bg-muted'
-      >
-        <h2 className='mb-6 text-3xl text-center font-semibold capitalize'>
-          Add Product
-        </h2>
-        <div className='grid items-start  mx-auto gap-4 md:grid-cols-2 lg:grid-cols-2'>
-          <CustomFormField
-            name='productName'
-            labelText='Product Name'
-            control={form.control}
-            type={undefined}
-          />
-          <CustomFormField
-            name='description'
-            labelText='Description'
-            control={form.control}
-            type={undefined}
-          />
-          <CustomFormField
-            name='price'
-            labelText='price'
-            control={form.control}
-            type='number'
-          />
-          <CustomFormField
-            name='discount'
-            labelText='discount'
-            control={form.control}
-            type='number'
-          />
-          {/* Image Uploader */}
-          <div className='flex flex-wrap gap-2 py-2'>
-            <div className='flex-1 min-w-fit'>
-              <ImageUploader name='images' />
+    <ModalController buttonText='Add Products' title='Add '>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className='p-8 rounded bg-muted'
+        >
+          <h2 className='mb-6 text-3xl text-center font-semibold capitalize'>
+            Add Product
+          </h2>
+          <div className='grid items-start  mx-auto gap-4 md:grid-cols-2 lg:grid-cols-2'>
+            <CustomFormField
+              name='productName'
+              labelText='Product Name'
+              control={form.control}
+              type={undefined}
+            />
+            <CustomFormField
+              name='description'
+              labelText='Description'
+              control={form.control}
+              type={undefined}
+            />
+            <CustomFormField
+              name='price'
+              labelText='price'
+              control={form.control}
+              type='number'
+            />
+            <CustomFormField
+              name='discount'
+              labelText='discount'
+              control={form.control}
+              type='number'
+            />
+            {/* Image Uploader */}
+            <div className='flex flex-wrap gap-2 py-2'>
+              <div className='flex-1 min-w-fit'>
+                <ImageUploader name='images' />
+              </div>
             </div>
-          </div>
-          <CustomFormField
-            name='inventory'
-            labelText='inventory'
-            control={form.control}
-            type='number'
-          />
-          <CustomFormSelect
-            name='mainCategoryId'
-            labelText='Main Category'
-            control={form.control}
-            items={mainCategoryOptions}
-          />
-          <CustomFormSelect
-            name='subCategoryId'
-            labelText='Sub Category'
-            control={form.control}
-            items={filteredSubCategories?.map((subCategory) => ({
-              label: subCategory?.subCategoryName,
-              value: subCategory?.subCategoryId,
-            }))}
-          />
+            <CustomFormField
+              name='inventory'
+              labelText='inventory'
+              control={form.control}
+              type='number'
+            />
+            <CustomFormSelect
+              name='mainCategoryId'
+              labelText='Main Category'
+              control={form.control}
+              items={mainCategoryOptions}
+            />
+            <CustomFormSelect
+              name='subCategoryId'
+              labelText='Sub Category'
+              control={form.control}
+              items={filteredSubCategories?.map((subCategory) => ({
+                label: subCategory?.subCategoryName,
+                value: subCategory?.subCategoryId,
+              }))}
+            />
 
-          <CustomFormSelect
-            name='nestedSubCategoryId'
-            labelText='Nested Sub Category'
-            control={form.control}
-            items={filteredNestedSubCategories?.map((nestedSubCategory) => ({
-              label: nestedSubCategory?.nestedSubCategoryName,
-              value: nestedSubCategory?.nestedSubCategoryId,
-            }))}
-          />
+            <CustomFormSelect
+              name='nestedSubCategoryId'
+              labelText='Nested Sub Category'
+              control={form.control}
+              items={filteredNestedSubCategories?.map((nestedSubCategory) => ({
+                label: nestedSubCategory?.nestedSubCategoryName,
+                value: nestedSubCategory?.nestedSubCategoryId,
+              }))}
+            />
 
-          <Button
-            type='submit'
-            className='self-end capitalize'
-            disabled={isPending}
-          >
-            {isPending ? 'loading...' : '  Add'}
-          </Button>
-          {/* Handle errors */}
-          {/* {isError && (
+            <Button
+              type='submit'
+              className='self-end capitalize'
+              disabled={isPending}
+            >
+              {isPending ? 'loading...' : '  Add'}
+            </Button>
+            {/* Handle errors */}
+            {/* {isError && (
             <p className='text-red-500 font-bold py-2'>
               {error?.data?.message}
             </p>
           )} */}
-        </div>
-      </form>
-    </Form>
-    // </ModalController>
+          </div>
+        </form>
+      </Form>
+    </ModalController>
   )
 }
 
