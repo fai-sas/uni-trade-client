@@ -1,10 +1,22 @@
+import Image from 'next/image'
+
 const MainCategoryCard = ({ category }) => {
   return (
-    <div>
-      <article className=' m-4 p-4 rounded-md shadow-md font-bold text-2xl'>
-        <h1>{category?.mainCategoryName}</h1>
-      </article>
-    </div>
+    <>
+      <div className='rounded-md p-4 shadow-md'>
+        <article className=' m-4 p-4  font-bold text-2xl'>
+          <h1>{category?.mainCategoryName}</h1>
+        </article>
+        <Image
+          src={category?.images}
+          alt={category?.mainCategoryName}
+          height={300}
+          width={1200}
+        />
+      </div>
+
+      {/*  */}
+    </>
   )
 }
 

@@ -1,6 +1,7 @@
 'use client'
 
 import { useGetAllProducts } from '@/hooks/product.hook'
+import ProductCard from './_components/ProductCard'
 
 const ProductPage = () => {
   const { data, isLoading, isError } = useGetAllProducts()
@@ -13,14 +14,9 @@ const ProductPage = () => {
       <div>
         <h1 className=' text-4xl font-bold p-8'>Product Page</h1>
       </div>
-      <div className=' text-4xl font-bold p-8'>
-        {products?.map((product) => {
-          return (
-            <article>
-              <h1>{product?.productName}</h1>
-              <h1>$ {product?.price}</h1>
-            </article>
-          )
+      <div className=' grid grid-cols-1 md:grid-cols-3 text-4xl font-bold p-8'>
+        {products.map((product) => {
+          return <ProductCard key={product?.productName} product={product} />
         })}
       </div>
     </>

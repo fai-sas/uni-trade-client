@@ -11,12 +11,17 @@ const MainCategory = () => {
   const { data } = useGetMainCategories()
 
   return (
-    <article className=''>
-      {data?.data?.map((category: any) => (
-        <MainCategoryCard key={category?.mainCategoryId} category={category} />
-      ))}
+    <>
+      <article className=' grid p-4 grid-cols-1 gap-4 md:grid-cols-3'>
+        {data?.data?.map((category: any) => (
+          <MainCategoryCard
+            key={category?.mainCategoryId}
+            category={category}
+          />
+        ))}
+      </article>
       <CreateMainCategoryForm />
-    </article>
+    </>
   )
 }
 

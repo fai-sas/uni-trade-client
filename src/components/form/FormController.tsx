@@ -54,6 +54,38 @@ export function CustomFormField({ name, labelText, type, control }) {
   )
 }
 
+// export function CustomFormSelect({ name, control, items, labelText }) {
+//   return (
+//     <FormField
+//       control={control}
+//       name={name}
+//       render={({ field }) => (
+//         <FormItem>
+//           <FormLabel className='capitalize'>{labelText || name}</FormLabel>
+//           <Select
+//             onValueChange={(value) => field.onChange(value)}
+//             value={field.value || ''} // Ensure value is a string or empty
+//           >
+//             <FormControl>
+//               <SelectTrigger>
+//                 <SelectValue placeholder={'Select'} />
+//               </SelectTrigger>
+//             </FormControl>
+//             <SelectContent>
+//               {items?.map((item) => (
+//                 <SelectItem key={item.value} value={item.value}>
+//                   {item.label}
+//                 </SelectItem>
+//               ))}
+//             </SelectContent>
+//           </Select>
+//           <FormMessage />
+//         </FormItem>
+//       )}
+//     />
+//   )
+// }
+
 export function CustomFormSelect({ name, control, items, labelText }) {
   return (
     <FormField
@@ -63,8 +95,10 @@ export function CustomFormSelect({ name, control, items, labelText }) {
         <FormItem>
           <FormLabel className='capitalize'>{labelText || name}</FormLabel>
           <Select
-            onValueChange={(value) => field.onChange(value)}
-            value={field.value || ''} // Ensure value is a string or empty
+            onValueChange={(value) => {
+              field.onChange(value || null) // Handle null values
+            }}
+            value={field.value !== null ? field.value : undefined} // Default to undefined if null
           >
             <FormControl>
               <SelectTrigger>
@@ -72,6 +106,10 @@ export function CustomFormSelect({ name, control, items, labelText }) {
               </SelectTrigger>
             </FormControl>
             <SelectContent>
+              <SelectItem key='null' value={null}>
+                None
+              </SelectItem>{' '}
+              {/* Use null directly */}
               {items?.map((item) => (
                 <SelectItem key={item.value} value={item.value}>
                   {item.label}

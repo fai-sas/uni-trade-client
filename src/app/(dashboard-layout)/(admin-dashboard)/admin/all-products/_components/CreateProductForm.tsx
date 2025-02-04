@@ -48,8 +48,8 @@ const CreateProductForm = () => {
   const defaultFormValues = {
     productName: '',
     mainCategoryId: '',
-    subCategoryId: '',
-    nestedSubCategoryId: '',
+    subCategoryId: null,
+    nestedSubCategoryId: null,
     description: '',
     images: [],
     price: 4567,
@@ -76,7 +76,7 @@ const CreateProductForm = () => {
           subCategory?.mainCategory?.mainCategoryId === mainCategory
       )
       setFilteredSubCategories(filteredSubs)
-      form.setValue('subCategoryId', '')
+      form.setValue('subCategoryId', null)
     }
   }, [form.watch('mainCategoryId'), subCategories])
 
@@ -89,7 +89,7 @@ const CreateProductForm = () => {
           nestedSubCategory?.subCategoryId === subCategory
       )
       setFilteredNestedSubCategories(filteredNestedSubs)
-      form.setValue('nestedSubCategoryId', '')
+      form.setValue('nestedSubCategoryId', null)
     }
   }, [form.watch('subCategoryId'), nestedSubCategories])
 
@@ -102,8 +102,9 @@ const CreateProductForm = () => {
       discount: data.discount,
       inventory: data.inventory,
       mainCategoryId: data.mainCategoryId,
-      subCategoryId: data.subCategoryId,
-      nestedSubCategoryId: data.nestedSubCategoryId,
+      subCategoryId: data.subCategoryId === '' ? null : data.subCategoryId,
+      nestedSubCategoryId:
+        data.nestedSubCategoryId === '' ? null : data.nestedSubCategoryId,
     }
     console.log(productData)
 
@@ -168,8 +169,8 @@ const CreateProductForm = () => {
               labelText='Sub Category'
               control={form.control}
               items={filteredSubCategories?.map((subCategory) => ({
-                label: subCategory?.subCategoryName,
-                value: subCategory?.subCategoryId,
+                label: subCategory?.subCategoryName || null,
+                value: subCategory?.subCategoryId || null,
               }))}
             />
 
@@ -178,8 +179,8 @@ const CreateProductForm = () => {
               labelText='Nested Sub Category'
               control={form.control}
               items={filteredNestedSubCategories?.map((nestedSubCategory) => ({
-                label: nestedSubCategory?.nestedSubCategoryName,
-                value: nestedSubCategory?.nestedSubCategoryId,
+                label: nestedSubCategory?.nestedSubCategoryName || null,
+                value: nestedSubCategory?.nestedSubCategoryId || null,
               }))}
             />
 

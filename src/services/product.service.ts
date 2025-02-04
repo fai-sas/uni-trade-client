@@ -14,15 +14,17 @@ export const createProduct = async (productData: FieldValues): Promise<any> => {
 
     return res.data
   } catch (error: any) {
-    if (axios.isAxiosError(error)) {
-      console.error('Axios error:', error.response?.data || error.message)
-      throw new Error(
-        error.response?.data?.message || 'An unexpected error occurred'
-      )
-    } else {
-      console.error('Unexpected error:', error)
-      throw new Error('An unexpected error occurred')
-    }
+    // if (axios.isAxiosError(error)) {
+    //   console.error('Axios error:', error.response?.data || error.message)
+    //   throw new Error(
+    //     error.response?.data?.message || 'An unexpected error occurred'
+    //   )
+    // } else {
+    //   console.error('Unexpected error:', error)
+    //   throw new Error('An unexpected error occurred')
+    // }
+    console.error('Unexpected error:', error)
+    throw new Error('An unexpected error occurred')
   }
 }
 
